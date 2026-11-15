@@ -4,11 +4,9 @@
 
 /*
  * MARS KOLONISI YASAM DESTEK SIMULATORU
- * Metin tabanli, tek karakterli komutlarla kontrol edilen C oyunu.
  * Komutlar: G, O, T, D, U, K, H, Q
  */
 
-/* Sagllik, enerji, oksijen ve modul hasarini 0-100 araliginda tutar */
 void sinirla(int *saglik, int *enerji, int *oksijen, int *modulHasari) {
     if (*saglik > 100) *saglik = 100;
     if (*saglik < 0) *saglik = 0;
@@ -39,10 +37,10 @@ int main(int argc, char *argv[]) {
     int kilitMuhurlu = 0;   /* 0: Kilit muhurlu degil (acik), 1: Muhurlu */
 
     /* Zorluk seviyesine bagli parametreler */
-    int firtinaTur = 3;         /* kum firtinasi tur sayisi */
-    int firtinaHasar = 5;       /* firtinada tur basina temel hasar */
-    int kesifEsikYuksek = 50;   /* enerji ve oksijen iyiyken su bulma esigi */
-    int kesifEsikDusuk = 25;    /* aksi halde su bulma esigi */
+    int firtinaTur = 3;         
+    int firtinaHasar = 5;       
+    int kesifEsikYuksek = 50;  
+    int kesifEsikDusuk = 25;   
 
     int sonuc = 0;              /* 0: devam, 1: kaybetti, 2: kazandi, 3: cikis */
     int gecerliTur;             /* 1: komut tur harcar, 0: harcamaz */
@@ -125,7 +123,7 @@ int main(int argc, char *argv[]) {
                 oksijen -= 10;
                 printf("Kesif gorevine cikildi (Enerji -15, Oksijen -10).\n");
 
-                /* Enerji ve oksijen iyiyse su bulma ihtimali yuksek */
+                
                 int esik;
                 if (enerji > 40 && oksijen > 30) {
                     esik = kesifEsikYuksek;
@@ -142,10 +140,10 @@ int main(int argc, char *argv[]) {
                     printf("Zar: %d / Esik: 10 -> Yaralanma yok.\n", zarYaralanma);
                 }
 
-                /* Kesif sonucu: su / yedek parca / eli bos */
+                
                 int zar = rand() % 100;
                 if (zar < esik) {
-                    int bulunan = 5 + rand() % 11;   /* 5-15 birim su */
+                    int bulunan = 5 + rand() % 11;   
                     su += bulunan;
                     printf("Zar: %d / Esik: %d -> BASARILI: %d birim su buldunuz!\n", zar, esik, bulunan);
                 } else if (zar < esik + 20) {
@@ -165,7 +163,7 @@ int main(int argc, char *argv[]) {
                 int i;
                 int zararEsigi = 60;
 
-                /* Oyuncunun durumuna gore firtina daha tehlikeli olur */
+                
                 if (modulHasari > 70) {
                     zararEsigi = 80;
                 } else if (modulHasari > 40) {
@@ -212,7 +210,7 @@ int main(int argc, char *argv[]) {
                         printf("  Zar: %d / Esik: %d -> Firtinadan zararsiz korundunuz.\n", zar, zararEsigi);
                     }
 
-                    /* Degerleri sinirla ve olum kontrolu */
+                    
                     sinirla(&saglik, &enerji, &oksijen, &modulHasari);
                     if (saglik <= 0 || oksijen <= 0) {
                         printf("  !!! Kritik seviye, firtina simulasyonu kesildi !!!\n");
@@ -258,9 +256,9 @@ int main(int argc, char *argv[]) {
                     break;
                 }
 
-                artik = miktar % 2;               /* tek ise 1 birim artik */
+                artik = miktar % 2;              
                 kullanilan = miktar - artik;
-                uretilen = (kullanilan / 2) * 3;  /* 2 su -> 3 oksijen */
+                uretilen = (kullanilan / 2) * 3;  
 
                 if (oksijen + uretilen > 100) {
                     printf("Oksijen 100'u asamaz, fazlasi bosa gidiyor.\n");
